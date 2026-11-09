@@ -1,0 +1,145 @@
+[
+  {
+    "id": "dengue_001",
+    "disease": "Dengue",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2024",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/dengue-and-severe-dengue",
+    "content": "Dengue is a viral infection transmitted to humans through the bite of infected Aedes mosquitoes, mainly Aedes aegypti. These mosquitoes typically bite during the day. Symptoms usually begin 4-10 days after infection and include high fever, severe headache, pain behind the eyes, muscle and joint pain, nausea, vomiting, swollen glands, and rash. Most people recover in 1-2 weeks, but some develop severe dengue, a potentially fatal complication, due to plasma leaking, fluid accumulation, respiratory distress, severe bleeding, or organ impairment. Warning signs of severe dengue include abdominal pain, persistent vomiting, bleeding gums or nose, fatigue, restlessness, blood in vomit or stool, and rapid breathing. There is no specific treatment for dengue; management focuses on relieving symptoms with rest, fluids, and paracetamol (NOT aspirin or ibuprofen, which can increase bleeding risk). Prevention centers on avoiding mosquito bites and eliminating breeding sites (standing water)."
+  },
+  {
+    "id": "dengue_002",
+    "disease": "Dengue",
+    "document_type": "prevention",
+    "language": "en",
+    "source": "National Centre for Disease Control (NCDC), India",
+    "publisher": "NCDC",
+    "publication_date": "2023",
+    "url": "https://ncdc.mohfw.gov.in/",
+    "content": "Dengue prevention in India focuses on source reduction: emptying, cleaning, or covering containers that hold water weekly (coolers, drums, flower pots, tyres); using mosquito nets and repellents; wearing full-sleeve clothing; using window/door screens; and community fogging during outbreaks. Government guidance recommends 'Dry Day' once a week in households to prevent Aedes breeding. Anyone with high fever for more than 2 days should get tested rather than self-medicate."
+  },
+  {
+    "id": "malaria_001",
+    "disease": "Malaria",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2024",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/malaria",
+    "content": "Malaria is a life-threatening disease caused by Plasmodium parasites, transmitted through the bites of infected female Anopheles mosquitoes, which bite mainly between dusk and dawn. Symptoms include fever, chills, headache, and in severe cases, fatigue, confusion, seizures, and difficulty breathing. Symptoms typically appear 10-15 days after the infective mosquito bite. Young children, pregnant women, and travelers from non-endemic areas are at higher risk of severe disease. Severe malaria is a medical emergency and can be fatal within 24 hours without treatment. Diagnosis requires a blood test (microscopy or rapid diagnostic test); treatment requires antimalarial medication prescribed by a healthcare provider - self-medication is discouraged due to resistance and dosing risks."
+  },
+  {
+    "id": "malaria_002",
+    "disease": "Malaria",
+    "document_type": "prevention",
+    "language": "en",
+    "source": "Ministry of Health & Family Welfare, Government of India",
+    "publisher": "MoHFW",
+    "publication_date": "2023",
+    "url": "https://mohfw.gov.in/",
+    "content": "Malaria prevention includes sleeping under insecticide-treated mosquito nets, indoor residual spraying, eliminating stagnant water near homes, using repellents at dusk/dawn, and wearing protective clothing. India's National Vector Borne Disease Control Programme provides free diagnosis and treatment at government health centers."
+  },
+  {
+    "id": "tb_001",
+    "disease": "Tuberculosis",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2024",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/tuberculosis",
+    "content": "Tuberculosis (TB) is caused by the bacterium Mycobacterium tuberculosis, which most often affects the lungs. It spreads through the air when infected people cough, sneeze, or spit - prolonged close contact is usually needed for transmission, not brief casual contact. Common symptoms are a persistent cough (lasting more than 2-3 weeks), chest pain, weakness, weight loss, fever, and night sweats. TB is curable with a 6-month course of antibiotics, but treatment must be completed fully even after symptoms improve, or drug-resistant TB can develop. In India, diagnosis and treatment are available free of cost through the National TB Elimination Programme (NTEP) at government health facilities, including Nikshay centers."
+  },
+  {
+    "id": "diabetes_001",
+    "disease": "Diabetes",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2024",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/diabetes",
+    "content": "Diabetes is a chronic disease where the body either does not produce enough insulin (Type 1) or cannot effectively use the insulin it produces (Type 2, the most common form). Symptoms include excessive thirst, frequent urination, unexplained weight loss, fatigue, blurred vision, and slow-healing wounds; Type 2 diabetes symptoms often develop gradually and may go unnoticed for years. Risk factors for Type 2 diabetes include being overweight, physical inactivity, family history, and age. Diagnosis requires a blood glucose test performed by a healthcare provider. Management involves blood sugar monitoring, diet, physical activity, and medication/insulin as prescribed - diabetes cannot be self-diagnosed or self-treated safely."
+  },
+  {
+    "id": "hypertension_001",
+    "disease": "Hypertension",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2023",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/hypertension",
+    "content": "Hypertension (high blood pressure) is often called a 'silent' condition because most people have no symptoms. Some may experience headaches, shortness of breath, or nosebleeds, but these usually occur only when blood pressure is severely elevated. Diagnosis requires blood pressure measurement over multiple readings by a healthcare provider. Unmanaged hypertension raises the risk of heart attack, stroke, and kidney damage. Prevention and management include reducing salt intake, regular physical activity, avoiding tobacco and excess alcohol, managing stress, and taking prescribed medication consistently."
+  },
+  {
+    "id": "covid19_001",
+    "disease": "COVID-19",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2024",
+    "url": "https://www.who.int/health-topics/coronavirus",
+    "content": "COVID-19 is caused by the SARS-CoV-2 virus and spreads mainly through respiratory droplets and close contact. Common symptoms include fever, cough, tiredness, and loss of taste or smell; severe cases can cause difficulty breathing, chest pain, or confusion. Most people recover with rest, fluids, and symptom management. People with severe symptoms (difficulty breathing, persistent chest pain, confusion, bluish lips or face) require immediate emergency medical attention. Prevention includes vaccination, ventilation, hand hygiene, and masks in high-risk settings."
+  },
+  {
+    "id": "cholera_001",
+    "disease": "Cholera",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2023",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/cholera",
+    "content": "Cholera is an acute diarrheal infection caused by ingesting food or water contaminated with Vibrio cholerae bacteria. Most infected people have no or mild symptoms, but some develop severe watery diarrhea and vomiting, leading to rapid dehydration which can be fatal within hours if untreated. Severe dehydration is a medical emergency requiring immediate oral rehydration solution (ORS) or IV fluids. Prevention relies on safe drinking water, proper sanitation, and hand hygiene."
+  },
+  {
+    "id": "typhoid_001",
+    "disease": "Typhoid",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2023",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/typhoid",
+    "content": "Typhoid fever is caused by Salmonella Typhi bacteria, spread through contaminated food and water. Symptoms include sustained high fever, weakness, abdominal pain, headache, and loss of appetite, developing gradually over 1-3 weeks. Untreated typhoid can cause serious intestinal complications. Diagnosis requires a blood test; treatment requires prescribed antibiotics - self-medication risks resistance and complications. Prevention includes safe water, food hygiene, and vaccination in high-risk areas."
+  },
+  {
+    "id": "hepatitis_001",
+    "disease": "Hepatitis",
+    "document_type": "overview",
+    "language": "en",
+    "source": "World Health Organization (WHO)",
+    "publisher": "WHO",
+    "publication_date": "2023",
+    "url": "https://www.who.int/news-room/fact-sheets/detail/hepatitis",
+    "content": "Viral hepatitis (A, B, C, D, E) causes liver inflammation. Hepatitis A and E spread mainly through contaminated food/water and cause acute illness with jaundice, fatigue, and nausea. Hepatitis B and C spread through blood and body fluids and can become chronic, leading to liver damage over years. Vaccines exist for Hepatitis A and B. Diagnosis requires blood tests; chronic hepatitis B/C require long-term medical management, not self-treatment."
+  },
+  {
+    "id": "maternal_001",
+    "disease": "Maternal and Child Health",
+    "document_type": "awareness",
+    "language": "en",
+    "source": "Ministry of Health & Family Welfare, Government of India",
+    "publisher": "MoHFW",
+    "publication_date": "2023",
+    "url": "https://mohfw.gov.in/",
+    "content": "Regular antenatal checkups, institutional delivery, iron-folic acid supplementation, and immunization are key pillars of maternal and child health in India. Warning signs in pregnancy requiring urgent medical attention include severe abdominal pain, heavy bleeding, severe headache with blurred vision, reduced fetal movement, high fever, and convulsions. Child health warning signs include persistent high fever, difficulty breathing, refusal to feed, lethargy, and seizures - these require immediate medical attention."
+  },
+  {
+    "id": "general_emergency_001",
+    "disease": "General Emergency Signs",
+    "document_type": "safety",
+    "language": "en",
+    "source": "WHO / NCDC Emergency Guidance (general public-health reference)",
+    "publisher": "WHO/NCDC",
+    "publication_date": "2023",
+    "url": "https://www.who.int/",
+    "content": "Seek immediate emergency medical care for: severe difficulty breathing or shortness of breath; chest pain or pressure; sudden confusion, trouble speaking, or facial drooping (possible stroke); severe uncontrolled bleeding; loss of consciousness or unresponsiveness; seizures; signs of severe allergic reaction (swelling of face/throat, difficulty breathing after exposure to an allergen); high fever with stiff neck or rash in a child; severe dehydration; and serious injury or suspected poisoning. In these situations, call local emergency services or go to the nearest hospital immediately rather than waiting for an online response."
+  }
+]

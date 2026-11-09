@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Odisha Public Health Chatbot — Dev Tester</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+  .app {
+    width: 100%;
+    max-width: 720px;
+    min-height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  }
+  header {
+    background: #0b6e4f;
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header h1 { font-size: 18px; margin: 0; }
+  header select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: none;
+  }
+  .api-bar {
+    padding: 8px 20px;
+    background: #eef3f1;
+    font-size: 12px;
+    color: #555;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .api-bar input {
+    flex: 1;
+    min-width: 200px;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 12px;
+  }
+  .tabs {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .tabs button {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    background: #fff;
+    cursor: pointer;
+    font-size: 13px;
+    color: #555;
+    border-bottom: 3px solid transparent;
+  }
+  .tabs button.active {
+    color: #0b6e4f;
+    border-bottom: 3px solid #0b6e4f;
+    font-weight: 600;
+  }
+  .panel { display: none; flex: 1; flex-direction: column; padding: 16px 20px; overflow-y: auto; }
+  .panel.active { display: flex; }
+
+  /* Chat panel */
+  #messages { flex: 1; overflow-y: auto; margin-bottom: 12px; min-height: 300px; }
+  .msg { margin: 10px 0; display: flex; }
+  .msg.user { justify-content: flex-end; }
+  .bubble { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.4; white-space: pre-wrap; }
+  .msg.user .bubble { background: #0b6e4f; color: white; border-bottom-right-radius: 2px; }
+  .msg.bot .bubble { background: #f1f1f1; color: #222; border-bottom-left-radius: 2px; }
+  .msg.bot.emergency .bubble { background: #ffe5e5; border: 1px solid #e05555; color: #a30000; font-weight: 600; }
+  .meta { font-size: 11px; color: #888; margin-top: 4px; }
+  .sources { margin-top: 6px; font-size: 12px; }
+  .sources a { color: #0b6e4f; text-decoration: none; display: block; margin-top: 2px; }
+  .disclaimer { font-size: 11px; color: #999; margin-top: 6px; font-style: italic; }
+
+  .input-row { display: flex; gap: 8px; }
+  .input-row input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+  }
+  .input-row button {
+    padding: 12px 18px;
+    background: #0b6e4f;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  .input-row button:disabled { background: #aaa; cursor: not-allowed; }
+
+  .quick-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .quick-row button {
+    font-size: 12px;
+    padding: 6px 10px;
+    background: #e8f3ee;
+    border: 1px solid #c3dfd3;
+    border-radius: 14px;
+    cursor: pointer;
+    color: #0b6e4f;
+  }
+
+  /* Risk panel */
+  .field { margin-bottom: 12px; }
+  .field label { display: block; font-size: 13px; font-weight: 600; margin-bottom: 4px; }
+  .field input, .field select { width: 100%; padding: 8px; border-radius: 6px; border: 1px solid #ccc; font-size: 13px; }
+  .result-box { margin-top: 16px; padding: 14px; border-radius: 8px; background: #f8f8f8; font-size: 13px; }
+  .risk-low { border-left: 5px solid #2e7d32; }
+  .risk-moderate { border-left: 5px solid #e6a700; }
+  .risk-high { border-left: 5px solid #c62828; }
+  .submit-btn { background: #0b6e4f; color: white; border: none; padding: 10px 16px; border-radius: 8px; cursor: pointer; font-size: 14px; }
+
+  /* Misinfo panel */
+  textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid #ccc; font-size: 13px; min-height: 70px; }
+  .verdict-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; color: white; }
+  .v-false, .v-misleading { background: #c62828; }
+  .v-unsupported, .v-insufficient_evidence { background: #999; }
+  .v-supported { background: #2e7d32; }
+
+  .loading { font-size: 12px; color: #888; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="app">
+  <header>
+    <h1>🩺 Odisha Public Health Chatbot</h1>
+    <select id="langSelect">
+      <option value="en">English</option>
+      <option value="hi">Hindi (not yet translated)</option>
+      <option value="or">Odia (not yet translated)</option>
+    </select>
+  </header>
+
+  <div class="api-bar">
+    Backend URL:
+    <input id="apiBase" value="http://127.0.0.1:8000" />
+    <span id="connStatus">●</span>
+  </div>
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="chat">💬 Chat</button>
+    <button class="tab-btn" data-tab="risk">🩹 Risk Check</button>
+    <button class="tab-btn" data-tab="misinfo">🔍 Misinformation</button>
+  </div>
+
+  <!-- CHAT PANEL -->
+  <div class="panel active" id="panel-chat">
+    <div class="quick-row">
+      <button onclick="quickAsk('What are the symptoms of dengue?')">Dengue symptoms</button>
+      <button onclick="quickAsk('How can I prevent malaria?')">Prevent malaria</button>
+      <button onclick="quickAsk('How does tuberculosis spread?')">TB spread</button>
+      <button onclick="quickAsk('I have severe chest pain and difficulty breathing')">⚠️ Test emergency</button>
+    </div>
+    <div id="messages"></div>
+    <div class="input-row">
+      <input id="chatInput" placeholder="Ask a health question..." onkeydown="if(event.key==='Enter') sendChat()" />
+      <button id="sendBtn" onclick="sendChat()">Send</button>
+    </div>
+  </div>
+
+  <!-- RISK PANEL -->
+  <div class="panel" id="panel-risk">
+    <div class="field">
+      <label>Age group</label>
+      <select id="riskAge">
+        <option value="infant">Infant</option>
+        <option value="child_under_5">Child under 5</option>
+        <option value="child">Child</option>
+        <option value="adult" selected>Adult</option>
+        <option value="elderly_65_plus">Elderly (65+)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>Symptoms (comma-separated, e.g. "high fever, joint pain")</label>
+      <input id="riskSymptoms" placeholder="high fever, joint pain" />
+    </div>
+    <div class="field">
+      <label>Duration (days)</label>
+      <input id="riskDuration" type="number" placeholder="3" />
+    </div>
+    <div class="field">
+      <label>Temperature (°C, optional)</label>
+      <input id="riskTemp" type="number" step="0.1" placeholder="39.0" />
+    </div>
+    <div class="field">
+      <label><input type="checkbox" id="riskPregnant" style="width:auto;"> Pregnant</label>
+    </div>
+    <button class="submit-btn" onclick="sendRisk()">Assess Risk</button>
+    <div id="riskResult"></div>
+  </div>
+
+  <!-- MISINFO PANEL -->
+  <div class="panel" id="panel-misinfo">
+    <div class="field">
+      <label>Paste a health claim or forwarded message to check</label>
+      <textarea id="misinfoClaim" placeholder='e.g. "Drinking a particular substance completely cures dengue"'></textarea>
+    </div>
+    <button class="submit-btn" onclick="sendMisinfo()">Check Claim</button>
+    <div id="misinfoResult"></div>
+  </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+// Tab switching
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    $('panel-' + btn.dataset.tab).classList.add('active');
+  });
+});
+
+function apiBase() { return $('apiBase').value.replace(/\/$/, ''); }
+
+function quickAsk(text) {
+  $('chatInput').value = text;
+  sendChat();
+}
+
+function addMessage(role, text, extra = {}) {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg ' + role + (extra.isEmergency ? ' emergency' : '');
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.textContent = text;
+  wrap.appendChild(bubble);
+
+  if (extra.meta) {
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    meta.textContent = extra.meta;
+    wrap.appendChild(meta);
+  }
+  if (extra.sources && extra.sources.length) {
+    const src = document.createElement('div');
+    src.className = 'sources';
+    src.innerHTML = '<strong>Sources:</strong>' + extra.sources.map(s =>
+      `<a href="${s.url}" target="_blank">• ${s.source} (${s.publication_date})</a>`
+    ).join('');
+    wrap.appendChild(src);
+  }
+  if (extra.disclaimer) {
+    const d = document.createElement('div');
+    d.className = 'disclaimer';
+    d.textContent = extra.disclaimer;
+    wrap.appendChild(d);
+  }
+  $('messages').appendChild(wrap);
+  $('messages').scrollTop = $('messages').scrollHeight;
+}
+
+async function sendChat() {
+  const text = $('chatInput').value.trim();
+  if (!text) return;
+  addMessage('user', text);
+  $('chatInput').value = '';
+  $('sendBtn').disabled = true;
+  const loadingEl = document.createElement('div');
+  loadingEl.className = 'loading';
+  loadingEl.textContent = 'Thinking...';
+  $('messages').appendChild(loadingEl);
+  $('messages').scrollTop = $('messages').scrollHeight;
+
+  try {
+    const res = await fetch(apiBase() + '/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: text, language: $('langSelect').value })
+    });
+    const data = await res.json();
+    loadingEl.remove();
+    addMessage('bot', data.response, {
+      isEmergency: data.is_emergency,
+      meta: `intent: ${data.intent} · provider: ${data.provider_used || 'n/a'}`,
+      sources: data.sources,
+      disclaimer: data.disclaimer
+    });
+  } catch (e) {
+    loadingEl.remove();
+    addMessage('bot', '⚠️ Could not reach backend at ' + apiBase() + '. Is uvicorn running?');
+  }
+  $('sendBtn').disabled = false;
+}
+
+async function sendRisk() {
+  const symptoms = $('riskSymptoms').value.split(',').map(s => s.trim()).filter(Boolean);
+  const body = {
+    age_group: $('riskAge').value,
+    symptoms: symptoms,
+    duration_days: $('riskDuration').value ? parseFloat($('riskDuration').value) : null,
+    temperature_celsius: $('riskTemp').value ? parseFloat($('riskTemp').value) : null,
+    pregnant: $('riskPregnant').checked,
+    existing_conditions: []
+  };
+  $('riskResult').innerHTML = '<div class="loading">Assessing...</div>';
+  try {
+    const res = await fetch(apiBase() + '/risk-assessment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    $('riskResult').innerHTML = `
+      <div class="result-box risk-${data.risk_level}">
+        <strong>Risk level: ${data.risk_level.toUpperCase()}</strong><br><br>
+        <strong>Factors considered:</strong>
+        <ul>${data.factors_considered.map(f => `<li>${f}</li>`).join('')}</ul>
+        <strong>Recommendation:</strong> ${data.recommendation}
+        <div class="disclaimer">${data.disclaimer}</div>
+      </div>`;
+  } catch (e) {
+    $('riskResult').innerHTML = '⚠️ Could not reach backend.';
+  }
+}
+
+async function sendMisinfo() {
+  const claim = $('misinfoClaim').value.trim();
+  if (!claim) return;
+  $('misinfoResult').innerHTML = '<div class="loading">Checking against trusted sources...</div>';
+  try {
+    const res = await fetch(apiBase() + '/misinformation-check', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ claim })
+    });
+    const data = await res.json();
+    const srcHtml = (data.sources || []).map(s => `<a href="${s.url}" target="_blank">• ${s.source}</a>`).join('<br>');
+    $('misinfoResult').innerHTML = `
+      <div class="result-box">
+        <span class="verdict-badge v-${data.verdict}">${data.verdict.replace('_',' ').toUpperCase()}</span>
+        <p>${data.explanation}</p>
+        ${srcHtml ? '<strong>Sources:</strong><br>' + srcHtml : ''}
+      </div>`;
+  } catch (e) {
+    $('misinfoResult').innerHTML = '⚠️ Could not reach backend.';
+  }
+}
+
+// Connection check
+async function checkConn() {
+  try {
+    const res = await fetch(apiBase() + '/');
+    $('connStatus').style.color = res.ok ? '#2e7d32' : '#c62828';
+  } catch (e) {
+    $('connStatus').style.color = '#c62828';
+  }
+}
+checkConn();
+setInterval(checkConn, 5000);
+</script>
+</body>
+</html>
